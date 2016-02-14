@@ -1,17 +1,35 @@
 
-var x1 =100;
-var y1 =50;
-var x2 =300;
-var y2 =150;
-var x3 =100;
-var y3 = 250;
-var x4 = 300;
-var y4 = 350;
+var monsters = [];
+var numMonsters = 4;
+
 var monh =90;
 var monw =150;
+
+// Where monsters start from
+var monsterStartX1 = -150;
+var monsterStartX2 = 50;
+
+var currentMonsterStartX = monsterStartX1;
+var currentMonsterStartY = 50;
+
+// Loop from 0 to numMonsters.
+for (var i=0; i<numMonsters; i++) {
+    var monster = {
+        x: currentMonsterStartX,
+        y: currentMonsterStartY,
+        width: monw,
+        height: monh
+    };
+    monsters.push(monster);
+    if (currentMonsterStartX === monsterStartX1) {
+        currentMonsterStartX = monsterStartX2;
+    } else {
+        currentMonsterStartX = monsterStartX1;
+    }
+    currentMonsterStartY += 100;
+}
+
 var speed =1;
-
-
 
 draw = function() {
     
@@ -19,13 +37,11 @@ draw = function() {
     fill(0, 221, 255);
     ellipse(200, mouseY, 50, 50);
     fill(255, 0, 0);
-    ellipse(x1,y1,monw,monh);
-    ellipse(x2,y2,monw,monh);
-    ellipse(x3,y3,monw,monh);
-    ellipse(x4,y4,monw,monh);
- x1+=speed;
- x2+=speed;
- x3+=speed;
- x4+=speed;
- if (
+    monsters.forEach(function (monster) {
+        ellipse(monster.x, monster.y, monster.width, monster.height);
+        monster.x += speed;
+        if (monster.x > 450) {
+            monster.x = -150;
+        }
+    });
 };
