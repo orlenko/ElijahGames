@@ -1,0 +1,57 @@
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           <html>
+    <head>
+        <title>Hey, this is a project for the Average function!</title>
+    </head>
+    <body>
+        <h1>Enter a number to calculate the average value between 1 and your number:</h1>
+        <input type="number" name="number">
+        <button name="calculate">Calculate!</button>
+        <p name="result"></p>
+        <p name="smartresult"></p>
+    </body>
+
+    <script>
+        function calculateAverageFromOne(number) {
+            var sum = 0;
+            for(var counter= 1;counter <= number;counter++){
+                sum = sum + counter;
+            }
+            return sum/number;
+        }
+
+        function smartAverageFromOne(number) {
+            var isEven = (number % 2) == 0;
+            console.log(isEven);
+            if (isEven) {
+                return (1 + number) * (number / 2) / number;
+            } else {
+                return (number - 1) / 2 + 1;
+            }
+        }
+
+
+
+        var button = document.getElementsByName("calculate")[0];
+        console.log('got a button: ' + button);
+        button.addEventListener('click', function () {
+            var number = parseInt(document.getElementsByName("number")[0].value);
+
+            var start = new Date();
+            var average = calculateAverageFromOne(number);
+            var end = new Date();
+            var duration = end - start;
+            var resultParagraph = document.getElementsByName('result')[0];
+            resultParagraph.innerText = 'Dumb: Average from 1 to ' + number + ' is: ' + average + ', it took ' + duration + ' to calculate';
+
+
+            var start = new Date();
+            var average = smartAverageFromOne(number);
+            var end = new Date();
+            var duration = end - start;
+            var resultParagraph = document.getElementsByName('smartresult')[0];
+            resultParagraph.innerText = 'Smart: Average from 1 to ' + number + ' is: ' + average + ', it took ' + duration + ' to calculate';
+
+        });
+
+    </script>
+</html>
